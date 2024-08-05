@@ -1,6 +1,4 @@
-﻿using BuildingBlocks.CQRS;
-using CatalogApi.Models;
-using Marten;
+﻿
 
 namespace CatalogApi.Products.CreateProduct
 {
