@@ -1,6 +1,5 @@
 using BuildingBlocks.Behaviours;
 using FluentValidation;
-using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
