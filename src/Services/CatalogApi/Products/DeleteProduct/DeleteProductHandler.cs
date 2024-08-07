@@ -21,7 +21,7 @@ namespace CatalogApi.Products.DeleteProduct
         {
             var entity = await session.LoadAsync<Product>(request.Id);
             if (entity == null)
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(request.Id);
             session.Delete(entity);
             await session.SaveChangesAsync();
             return new DeleteProductResult(true);

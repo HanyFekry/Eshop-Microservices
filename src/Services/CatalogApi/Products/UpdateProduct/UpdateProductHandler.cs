@@ -25,7 +25,7 @@ namespace CatalogApi.Products.UpdateProduct
             var entity = request.Adapt<Product>();
             var entityFromDb = await session.LoadAsync<Product>(entity.Id);
             if (entityFromDb == null)
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(entity.Id);
             session.Update(entity);
             await session.SaveChangesAsync();
             return new UpdateProductResult(true);
