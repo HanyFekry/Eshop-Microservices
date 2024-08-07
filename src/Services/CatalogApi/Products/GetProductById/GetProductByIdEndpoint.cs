@@ -1,27 +1,20 @@
-﻿using CatalogApi.Products.GetProducts;
-
+﻿
 namespace CatalogApi.Products.GetProductById
 {
-    public record GetProductByIdRequest(Guid Id);
-    public record GetProductByIdResponse(ProductDto? Product);
+    public record GetProductByIdResponse(Guid Id, string Name, string Description, List<string> Category, double Price);
     public class GetProductByIdEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/products/{id:Guid}", async (Guid id, ISender sender) =>
+            app.MapGet("/products/{id:guid}", async (Guid id, ISender sender) =>
             {
-                var query = new GetProductByIdQuery(id);//request.Adapt<GetProductByIdQuery>();
-                var result = await sender.Send(query);
-                if (result.Product != null)
-                {
-                    var response = result.Adapt<GetProductByIdResponse>();
-                    return Results.Ok(response);
-                }
-                return Results.NotFound();
+                var result = await sender.Send(new GetProductByIdQuery(id));
+                var response = result.Adapt<GetProductByIdResponse>();
+                return Results.Ok(response);
             })
                 .WithName("GetProductById")
-                .Produces<GetProductByIdResponse>(statusCode: StatusCodes.Status200OK)
-                .ProducesProblem(statusCode: StatusCodes.Status404NotFound)
+                .Produces<GetProductByIdResponse>(StatusCodes.Status200OK)
+                .ProducesProblem(StatusCodes.Status404NotFound)
                 .WithDescription("Get Product By Id")
                 .WithSummary("Get Product By Id");
         }

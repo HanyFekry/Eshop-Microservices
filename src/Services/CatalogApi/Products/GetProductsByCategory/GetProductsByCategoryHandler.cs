@@ -1,4 +1,5 @@
-﻿using CatalogApi.Products.GetProducts;
+﻿using CatalogApi.Dtos;
+using CatalogApi.Products.GetProducts;
 
 namespace CatalogApi.Products.GetProductsByCategory
 {
