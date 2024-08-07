@@ -3,7 +3,6 @@
 namespace CatalogApi.Products.GetProducts
 {
     public record GetProductsQuery() : IQuery<GetProductsResult>;
-    public record ProductDto(Guid Id, string Name, string Description, List<string> Category, double Price);
     public record GetProductsResult(IReadOnlyList<ProductDto> ProductDtos);
     public class GetProductsHandler(IDocumentSession session, ILogger<GetProductsHandler> logger) : IQueryHandler<GetProductsQuery, GetProductsResult>
     {
