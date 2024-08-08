@@ -15,7 +15,7 @@ namespace CatalogApi.Products.DeleteProduct
             RuleFor(x => x.Id).NotEmpty().WithMessage("{PropertyName} is required.");
         }
     }
-    public class DeleteProductHandler(IDocumentSession session, ILogger<DeleteProductHandler> logger) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
+    public class DeleteProductHandler(IDocumentSession session) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
     {
         public async Task<DeleteProductResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
