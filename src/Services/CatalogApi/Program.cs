@@ -1,5 +1,6 @@
+using BuildingBlocks.Behaviors;
 using BuildingBlocks.Behaviours;
-using CatalogApi.Exceptions.Handlers;
+using BuildingBlocks.Exceptions.Handlers;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 
@@ -12,7 +13,8 @@ var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
-    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 //register fluent validation
 builder.Services.AddValidatorsFromAssembly(assembly);
