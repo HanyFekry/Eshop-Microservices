@@ -1,9 +1,4 @@
 ﻿
-
-
-using CatalogApi.Products.UpdateProduct;
-using FluentValidation;
-
 namespace CatalogApi.Products.DeleteProduct
 {
     public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;

@@ -1,7 +1,4 @@
 ﻿
-
-using FluentValidation;
-
 namespace CatalogApi.Products.UpdateProduct
 {
     public record UpdateProductCommand(Guid Id, string Name, string Description, List<string> Category, double Price,

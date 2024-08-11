@@ -1,7 +1,4 @@
 ﻿
-
-using FluentValidation;
-
 namespace CatalogApi.Products.CreateProduct
 {
     public record CreateProductCommand(string Name, string Description, List<string> Category, double Price,

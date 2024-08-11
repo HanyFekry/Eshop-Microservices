@@ -1,6 +1,4 @@
 ﻿
-using CatalogApi.Products.CreateProduct;
-
 namespace CatalogApi.Products.UpdateProduct
 {
     public record UpdateProductRequest(Guid Id, string Name, string Description, List<string> Category, double Price,
@@ -17,7 +15,7 @@ namespace CatalogApi.Products.UpdateProduct
                 return Results.Ok(result);
             })
                 .WithName("UpdateProduct")
-                .Produces<CreateProductResponse>(statusCode: StatusCodes.Status200OK)
+                .Produces<UpdateProductResponse>(statusCode: StatusCodes.Status200OK)
                 .ProducesProblem(statusCode: StatusCodes.Status400BadRequest)
                 .ProducesProblem(statusCode: StatusCodes.Status404NotFound)
                 .WithSummary("Update Product")

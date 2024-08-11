@@ -1,5 +1,4 @@
 using BuildingBlocks.Behaviors;
-using BuildingBlocks.Behaviours;
 using BuildingBlocks.Exceptions.Handlers;
 using CatalogApi.Data;
 using FluentValidation;

@@ -1,5 +1,4 @@
 ﻿
-using CatalogApi.Products.CreateProduct;
 
 namespace CatalogApi.Products.DeleteProduct
 {
@@ -15,7 +14,7 @@ namespace CatalogApi.Products.DeleteProduct
                 return Results.Ok(result);
             })
                 .WithName("DeleteProduct")
-                .Produces<CreateProductResponse>(statusCode: StatusCodes.Status200OK)
+                .Produces<DeleteProductResponse>(statusCode: StatusCodes.Status200OK)
                 .ProducesProblem(statusCode: StatusCodes.Status404NotFound)
                 .WithSummary("Delete Product")
                 .WithDescription("Delete Product");

@@ -1,6 +1,4 @@
-﻿using CatalogApi.Dtos;
-using CatalogApi.Products.GetProducts;
-
+﻿
 namespace CatalogApi.Products.GetProductsByCategory
 {
     public record GetProductsByCategoryQuery(string Category)
