@@ -3,13 +3,13 @@ using CatalogApi.Products.GetProducts;
 
 namespace CatalogApi.Products.GetProductsByCategory
 {
-    //public record GetProductsByCategoryRequest(string category);
+    //public record GetProductsByCategoryRequest(string Category);
     public record GetProductsByCategoryResponse(IReadOnlyList<ProductDto> ProductDtos);
     public class GetProductsByCategoryEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/products/category/{category}", async (string category, ISender sender) =>
+            app.MapGet("/products/Category/{Category}", async (string category, ISender sender) =>
             {
                 var query = new GetProductsByCategoryQuery(category);
                 var result = await sender.Send(query);
@@ -19,8 +19,8 @@ namespace CatalogApi.Products.GetProductsByCategory
                 .WithName("GetProductsByCategory")
                 .Produces<GetProductsResponse>(statusCode: StatusCodes.Status200OK)
                 .ProducesProblem(statusCode: StatusCodes.Status404NotFound)
-                .WithDescription("Get products by category")
-                .WithSummary("Get products by category");
+                .WithDescription("Get products by Category")
+                .WithSummary("Get products by Category");
         }
     }
 }

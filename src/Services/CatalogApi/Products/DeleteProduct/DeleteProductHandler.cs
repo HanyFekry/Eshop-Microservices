@@ -19,11 +19,11 @@ namespace CatalogApi.Products.DeleteProduct
     {
         public async Task<DeleteProductResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var entity = await session.LoadAsync<Product>(request.Id);
+            var entity = await session.LoadAsync<Product>(request.Id, cancellationToken);
             if (entity == null)
                 throw new ProductNotFoundException(request.Id);
             session.Delete(entity);
-            await session.SaveChangesAsync();
+            await session.SaveChangesAsync(cancellationToken);
             return new DeleteProductResult(true);
         }
     }

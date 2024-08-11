@@ -21,9 +21,11 @@ builder.Services.AddMediatR(config =>
 });
 //register fluent validation
 builder.Services.AddValidatorsFromAssembly(assembly);
+
 //add Carter for minimal API
 builder.Services.AddCarter();
-//add Marten to use Postgre sql as document DB
+
+//add Marten to use Postgresql as document DB
 builder.Services.AddMarten(config =>
 {
     config.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
@@ -35,6 +37,7 @@ if (builder.Environment.IsDevelopment())
 
 //add custom exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 //add health checks for postge sql
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!);

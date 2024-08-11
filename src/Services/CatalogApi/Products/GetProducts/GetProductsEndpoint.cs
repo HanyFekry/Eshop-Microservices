@@ -14,8 +14,6 @@ namespace CatalogApi.Products.GetProducts
             {
                 var query = request.Adapt<GetProductsQuery>();
                 var result = await sender.Send(query);
-                TypeAdapterConfig<IPagedList<Product>, IPagedList<Product>>.NewConfig()
-    .Map(dest => dest, src => src);
 
                 return Results.Ok(result.Adapt<GetProductsResponse>());
             })
