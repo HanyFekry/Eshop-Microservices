@@ -35,9 +35,10 @@ if (builder.Environment.IsDevelopment())
 
 //add custom exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
+//add health checks for postge sql
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
 
 var app = builder.Build();
 
