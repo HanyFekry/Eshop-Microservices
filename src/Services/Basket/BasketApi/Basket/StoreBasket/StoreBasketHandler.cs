@@ -10,7 +10,7 @@ namespace BasketApi.Basket.StoreBasket
         public StoreBasketCommandValidator()
         {
             RuleFor(x => x.Cart).NotNull().WithMessage("{PropertyName} can not be null.!");
-            RuleFor(x => x.Cart.UserName).NotNull().NotEmpty().WithMessage("{PropertyName} can not be null.!");
+            RuleFor(x => x.Cart.UserName).NotNull().NotEmpty().WithMessage("{PropertyName} is required.!");
         }
     }
     public class StoreBasketHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
