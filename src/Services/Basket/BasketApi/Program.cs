@@ -1,5 +1,6 @@
 using BasketApi.Data;
 using BuildingBlocks.Behaviors;
+using BuildingBlocks.Exceptions.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddCarter();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
@@ -22,5 +24,6 @@ var app = builder.Build();
 
 //app.UseHttpsRedirection();
 app.MapCarter();
+app.UseExceptionHandler(opt => { });
 
 app.Run();
