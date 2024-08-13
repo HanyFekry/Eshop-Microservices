@@ -1,6 +1,8 @@
 using BasketApi.Data;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handlers;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +14,20 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
+builder.Services.AddMarten(opt =>
+{
+    opt.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
+})
+.UseLightweightSessions();
+
 builder.Services.AddCarter();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,4 +36,8 @@ var app = builder.Build();
 app.MapCarter();
 app.UseExceptionHandler(opt => { });
 
+app.UseHealthChecks("/basket/health", options: new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.Run();
