@@ -5,3 +5,4 @@ global using Mapster;
 global using BuildingBlocks.CQRS;
 global using Marten;
 global using BuildingBlocks.Exceptions;
+global using BasketApi.Exceptions;

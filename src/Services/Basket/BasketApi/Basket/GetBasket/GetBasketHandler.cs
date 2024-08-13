@@ -1,19 +1,18 @@
 ﻿
 
+using BasketApi.Data;
+
 namespace BasketApi.Basket.GetBasket
 {
     public record GetBasketQuery(string UserName) : IQuery<GetBasketResult>;
 
     public record GetBasketResult(ShoppingCart Cart);
 
-    public class GetBasketHandler(IDocumentSession session) : IQueryHandler<GetBasketQuery, GetBasketResult>
+    public class GetBasketHandler(IBasketRepository repository) : IQueryHandler<GetBasketQuery, GetBasketResult>
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery request, CancellationToken cancellationToken)
         {
-            var result = await session.Query<ShoppingCart>()
-                .FirstOrDefaultAsync(x => x.UserName == request.UserName, cancellationToken);
-            if (result == null)
-                throw new NotFoundException("Basket", request.UserName);
+            var result = await repository.GetShoppingCartAsync(request.UserName, cancellationToken);
             return new GetBasketResult(result);
         }
     }

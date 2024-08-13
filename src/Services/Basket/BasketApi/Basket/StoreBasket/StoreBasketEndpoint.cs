@@ -10,7 +10,8 @@
             {
                 var command = request.Adapt<StoreBasketCommand>();
                 var result = await sender.Send(command);
-                return Results.Ok(result.Adapt<StoreBasketResponse>());
+                var response = result.Adapt<StoreBasketResponse>();
+                return Results.Created($"/basket/{response.UserName}", response);
             })
             .WithName("StoreBasket")
             .Produces<StoreBasketResponse>(statusCode: StatusCodes.Status200OK)

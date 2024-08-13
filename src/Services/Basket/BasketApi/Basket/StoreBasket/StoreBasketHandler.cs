@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BasketApi.Data;
+using FluentValidation;
 
 namespace BasketApi.Basket.StoreBasket
 {
@@ -10,14 +11,14 @@ namespace BasketApi.Basket.StoreBasket
         public StoreBasketCommandValidator()
         {
             RuleFor(x => x.Cart).NotNull().WithMessage("{PropertyName} can not be null.!");
-            RuleFor(x => x.Cart.UserName).NotNull().NotEmpty().WithMessage("{PropertyName} is required.!");
+            RuleFor(x => x.Cart.UserName).NotEmpty().WithMessage("{PropertyName} is required.!");
         }
     }
-    public class StoreBasketHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
+    public class StoreBasketHandler(IBasketRepository repository) : ICommandHandler<StoreBasketCommand, StoreBasketResult>
     {
         public async Task<StoreBasketResult> Handle(StoreBasketCommand request, CancellationToken cancellationToken)
         {
-            return new StoreBasketResult("");
+            return new StoreBasketResult(repository.StoreShoppingCartAsync(request.Cart, cancellationToken).GetAwaiter().GetResult().UserName);
         }
     }
 }

@@ -1,3 +1,4 @@
+using BasketApi.Data;
 using BuildingBlocks.Behaviors;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 builder.Services.AddCarter();
+
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 
 var app = builder.Build();
