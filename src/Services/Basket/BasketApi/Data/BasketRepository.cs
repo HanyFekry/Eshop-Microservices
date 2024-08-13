@@ -22,7 +22,7 @@
             var cart = await session.LoadAsync<ShoppingCart>(userName, cancellationToken);
             if (cart == null)
                 throw new ShoppingCartNotFoundException(userName);
-            session.Delete(userName);
+            session.Delete(cart);
             await session.SaveChangesAsync(cancellationToken);
             return true;
         }

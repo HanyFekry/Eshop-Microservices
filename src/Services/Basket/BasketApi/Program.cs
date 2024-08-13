@@ -17,6 +17,8 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(opt =>
 {
     opt.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
+    opt.Schema.For<ShoppingCart>()
+        .Identity(x => x.UserName);
 })
 .UseLightweightSessions();
 
