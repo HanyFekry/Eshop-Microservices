@@ -9,8 +9,8 @@ namespace BasketApi.Data
         public async Task<ShoppingCart> GetShoppingCartAsync(string userName, CancellationToken cancellationToken = default)
         {
             var cachedBasket = await cache.GetStringAsync(userName, cancellationToken);
-            if (cachedBasket == null)
-                return JsonSerializer.Deserialize<ShoppingCart>(cachedBasket);
+            if (cachedBasket != null)
+                return JsonSerializer.Deserialize<ShoppingCart>(cachedBasket)!;
             var basket = await basketRepository.GetShoppingCartAsync(userName, cancellationToken);
             await cache.SetAsync(userName, JsonSerializer.SerializeToUtf8Bytes(basket), cancellationToken);
             return basket;
