@@ -35,7 +35,8 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!);
+    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,7 +45,7 @@ var app = builder.Build();
 app.MapCarter();
 app.UseExceptionHandler(opt => { });
 
-app.UseHealthChecks("/basket/health", options: new HealthCheckOptions
+app.UseHealthChecks("/health", options: new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });

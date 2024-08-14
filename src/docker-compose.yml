@@ -10,9 +10,18 @@ services:
     build:
       context: .
       dockerfile: Services/CatalogApi/Dockerfile
+  distributedcache:
+    image: redis:7.4-alpine
+  basketapi:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/BasketApi/Dockerfile
 
 volumes:
   postgres_catalog:
   postgres_basket:
+  # cache:
+
 
 
