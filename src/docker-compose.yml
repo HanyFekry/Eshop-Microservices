@@ -18,10 +18,17 @@ services:
       context: .
       dockerfile: Services/Basket/BasketApi/Dockerfile
 
+  discountgrpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/DiscountGrpc/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
   # cache:
+
 
 
 
