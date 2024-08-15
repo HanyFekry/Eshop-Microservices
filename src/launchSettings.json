@@ -8,7 +8,8 @@
         "catalogapi": "StartDebugging",
         "basketapi": "StartDebugging",
         "basketdb": "StartWithoutDebugging",
-        "distributedcache": "StartWithoutDebugging"
+        "distributedcache": "StartWithoutDebugging",
+        "discountgrpc": "StartDebugging"
       }
     }
   }
