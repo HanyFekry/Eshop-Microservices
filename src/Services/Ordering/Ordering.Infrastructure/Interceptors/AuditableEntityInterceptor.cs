@@ -31,8 +31,8 @@ namespace Ordering.Infrastructure.Interceptors
 
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
                 {
-                    entry.Entity.ModifiedBy = "Hany";
-                    entry.Entity.ModifiedAt = DateTime.UtcNow;
+                    entry.Entity.LastModifiedBy = "Hany";
+                    entry.Entity.LastModified = DateTime.UtcNow;
                 }
             }
         }
