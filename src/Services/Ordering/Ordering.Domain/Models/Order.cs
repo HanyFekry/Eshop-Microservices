@@ -18,11 +18,11 @@ namespace Ordering.Domain.Models
             private set { }
         }
 
-        public static Order Create(OrderName orderName, Address shippingAddress, Address billingAddress,
-            CustomerId customerId, Payment payment)
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             var order = new Order
             {
+                Id = id,
                 OrderName = orderName,
                 ShippingAddress = shippingAddress,
                 BillingAddress = billingAddress,
@@ -34,9 +34,9 @@ namespace Ordering.Domain.Models
             return order;
         }
 
-        public void Update(OrderName orderName, Address shippingAddress, Address billingAddress,
-            CustomerId customerId, Payment payment, OrderStatus status)
+        public void Update(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
         {
+            Id = id;
             OrderName = orderName;
             ShippingAddress = shippingAddress;
             BillingAddress = billingAddress;

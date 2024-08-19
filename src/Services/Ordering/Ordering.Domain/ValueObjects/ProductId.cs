@@ -3,7 +3,7 @@ namespace Ordering.Domain.ValueObjects
 {
     public record ProductId
     {
-        public Guid Value { get; }
+        public Guid Value { get; private set; }
         public ProductId(Guid value) => Value = value;
 
         public static ProductId Of(Guid value)

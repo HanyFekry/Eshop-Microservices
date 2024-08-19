@@ -1,6 +1,7 @@
 using Ordering.Api;
 using Ordering.Application;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.AddApiServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.ApplyMigration();
+    await app.SeedAsync();
+}
 
 app.UseApiServices();
 
