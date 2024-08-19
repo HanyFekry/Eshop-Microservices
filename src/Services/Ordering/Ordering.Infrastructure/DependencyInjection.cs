@@ -9,6 +9,11 @@ namespace Ordering.Infrastructure
             IConfiguration configuration)
         {
             var connection = configuration.GetConnectionString("DefaultConnection")!;
+
+            services.AddDbContext<ApplicationDbContext>(opt =>
+            {
+                opt.UseSqlServer(connection);
+            });
             return services;
         }
     }
