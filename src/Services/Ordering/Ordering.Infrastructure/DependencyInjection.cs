@@ -13,6 +13,7 @@ namespace Ordering.Infrastructure
 
             services.AddDbContext<ApplicationDbContext>(opt =>
             {
+                opt.AddInterceptors(new AuditableEntityInterceptor());
                 opt.UseSqlServer(connection);
             });
             return services;
