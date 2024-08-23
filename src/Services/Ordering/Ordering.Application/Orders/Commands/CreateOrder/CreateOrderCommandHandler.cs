@@ -5,7 +5,7 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
     {
         public async Task<CreateOrderResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = await GenerateOrder(request.OrderDto);
+            var order = await GenerateOrder(request.Order);
             context.Orders.Add(order);
             await context.SaveChangesAsync(cancellationToken);
 
@@ -15,7 +15,7 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
 
         private async Task<Order> GenerateOrder(OrderDto dto)
         {
-            //var dto = command.OrderDto;
+            //var dto = command.Order;
             var billing = dto.BillingAddress;
             var shipping = dto.ShippingAddress;
             var pay = dto.Payment;

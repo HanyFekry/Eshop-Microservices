@@ -13,7 +13,7 @@ namespace Ordering.Application.Orders.Queries.GetOrdersByCustomerId
             var ordersFromDb = await context.Orders
                 .AsNoTracking()
                 .Include(x => x.OrderItems)
-                .Where(x => x.CustomerId.Value == request.CustomerId)
+                .Where(x => x.CustomerId == CustomerId.Of(request.CustomerId))
                 .ToListAsync(cancellationToken);
 
             return new GetOrdersByCustomerIdResult(ordersFromDb.ToOrderDtoList().ToList());

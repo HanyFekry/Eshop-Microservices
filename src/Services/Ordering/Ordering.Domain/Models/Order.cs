@@ -36,7 +36,7 @@ namespace Ordering.Domain.Models
 
         public void Update(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
         {
-            Id = id;
+            //Id = id;
             OrderName = orderName;
             ShippingAddress = shippingAddress;
             BillingAddress = billingAddress;

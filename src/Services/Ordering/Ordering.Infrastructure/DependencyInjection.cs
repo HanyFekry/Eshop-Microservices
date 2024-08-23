@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Data;
 
 namespace Ordering.Infrastructure
 {
@@ -18,6 +19,9 @@ namespace Ordering.Infrastructure
                 opt.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                 opt.UseSqlServer(connection);
             });
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
             return services;
         }
 

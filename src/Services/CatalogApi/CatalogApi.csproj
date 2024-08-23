@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BuldingBlocks\BuildingBlocks.csproj" />
-    <ProjectReference Include="..\Basket\BasketApi\BasketApi.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
 
 </Project>

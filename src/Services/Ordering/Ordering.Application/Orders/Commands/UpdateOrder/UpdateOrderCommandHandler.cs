@@ -8,10 +8,10 @@ namespace Ordering.Application.Orders.Commands.UpdateOrder
     {
         public async Task<UpdateOrderResult> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            var orderFromDb = await context.Orders.FindAsync(OrderId.Of(request.OrderDto.Id));
+            var orderFromDb = await context.Orders.FindAsync(OrderId.Of(request.Order.Id));
             if (orderFromDb == null)
-                throw new OrderNotFoundException(request.OrderDto.Id);
-            var order = await UpdateOrder(orderFromDb, request.OrderDto);
+                throw new OrderNotFoundException(request.Order.Id);
+            var order = await UpdateOrder(orderFromDb, request.Order);
             context.Orders.Update(order);
             await context.SaveChangesAsync(cancellationToken);
 
@@ -19,7 +19,7 @@ namespace Ordering.Application.Orders.Commands.UpdateOrder
         }
         private async Task<Order> UpdateOrder(Order order, OrderDto dto)
         {
-            //var dto = command.OrderDto;
+            //var dto = command.Order;
             var billing = dto.BillingAddress;
             var shipping = dto.ShippingAddress;
             var pay = dto.Payment;
@@ -30,11 +30,6 @@ namespace Ordering.Application.Orders.Commands.UpdateOrder
             var payment = Payment.Of(pay.CardName, pay.CardNumber, pay.Expiration, pay.Cvv, pay.PaymentMethod);
             order.Update(OrderId.Of(dto.Id), CustomerId.Of(dto.CustomerId), OrderName.Of(dto.OrderName)
                 , shippingAddress, billingAddress, payment, dto.Status);
-
-            foreach (var item in dto.OrderItems)
-            {
-                order.Add(ProductId.Of(item.ProductId), item.Quantity, item.Price);
-            }
 
             return order;
 

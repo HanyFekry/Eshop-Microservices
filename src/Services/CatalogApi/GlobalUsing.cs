@@ -8,4 +8,3 @@ global using CatalogApi.Models;
 global using CatalogApi.Exceptions;
 global using CatalogApi.Dtos;
 global using FluentValidation;
-global using BasketApi.Data;
