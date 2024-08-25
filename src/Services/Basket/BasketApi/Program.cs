@@ -1,8 +1,10 @@
 using BasketApi.Data;
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handlers;
+using BuildingBlocks.Messaging.MassTransit;
 using DiscountGrpc;
 using HealthChecks.UI.Client;
+using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,7 +47,9 @@ builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(opt =>
     };
 
     return handler;
-}); ;
+});
+//message broker
+builder.Services.AddMessageBroker(builder.Configuration);
 
 //cross-cutting services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
