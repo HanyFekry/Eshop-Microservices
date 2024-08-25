@@ -22,7 +22,7 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
         private async Task<CreateOrderCommand> MapBasketCheckoutToCreateOrderCommand(BasketCheckoutEvent message)
         {
             // Create full order with incoming event data
-            var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.State, message.ZipCode);
+            var addressDto = new AddressDto(message.FirstName, message.LastName, message.Email, message.Street, message.Country, message.City, message.PostalCode);
             var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.Cvv, message.PaymentMethod);
             var orderId = Guid.NewGuid();
 
