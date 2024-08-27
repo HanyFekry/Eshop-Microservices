@@ -9,7 +9,8 @@
         "basketapi": "StartDebugging",
         "basketdb": "StartWithoutDebugging",
         "distributedcache": "StartWithoutDebugging",
-        "discountgrpc": "StartDebugging"
+        "discountgrpc": "StartDebugging",
+        "ordering.api": "StartDebugging"
       }
     }
   }

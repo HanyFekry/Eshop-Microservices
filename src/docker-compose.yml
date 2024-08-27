@@ -9,6 +9,8 @@ services:
     image: redis:7.4-alpine
   orderdb:
     image: mcr.microsoft.com/mssql/server:2019-latest
+  messagebroker:
+    image: rabbitmq:3-management
   catalogapi:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
@@ -26,11 +28,18 @@ services:
       context: .
       dockerfile: Services/Discount/DiscountGrpc/Dockerfile
 
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.Api/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
   sql_order:
   # cache:
+
 
 
 

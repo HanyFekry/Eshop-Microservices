@@ -12,7 +12,8 @@ namespace Ordering.Api
             services.AddCarter();
             services.AddExceptionHandler<CustomExceptionHandler>();
             services.AddHealthChecks()
-                .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!);
+                .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
+                .AddRabbitMQ(new Uri(configuration.GetValue<string>("MessageBroker:Host")!));
             return services;
         }
 

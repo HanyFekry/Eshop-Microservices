@@ -46,6 +46,18 @@ services:
     # command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     # volumes: 
     #   - cache:/data
+  messagebroker:
+    container_name: messagebroker
+    image: rabbitmq:3-management
+    hostname: e-commerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+
   catalogapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -69,10 +81,14 @@ services:
       - ConnectionStrings__DefaultConnection= Server=basketdb;database=BasketDb;Port=5432;User Id=postgres;Password=postgres;Pooling=true
       - ConnectionStrings__Redis= distributedcache:6379 
       - GrpcSettings__DiscountUrl= https://discountgrpc:8081
+      - MessageBroker__Host=amqp://e-commerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
     depends_on:
       - basketdb
       - distributedcache
       - discountgrpc
+      - messagebroker
     ports:
       - "6001:8080"
       - "6061:8081"
@@ -92,3 +108,23 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  ordering.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DefaultConnection=Server=orderdb;Database=OrderingDb;User Id=sa;Password=P@ssw0rd2;TrustServerCertificate=true
+      - FeatureManagement__OrderFulfillment=true
+      - MessageBroker__Host=amqp://e-commerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+    ports:
+      - "6003:8080"
+      - "6063:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    depends_on:
+      - orderdb
+      - messagebroker

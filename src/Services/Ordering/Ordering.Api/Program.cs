@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Ordering.Api;
 using Ordering.Application;
 using Ordering.Infrastructure;
@@ -10,6 +12,7 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApiServices(builder.Configuration);
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,5 +23,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseApiServices();
+
 
 app.Run();
