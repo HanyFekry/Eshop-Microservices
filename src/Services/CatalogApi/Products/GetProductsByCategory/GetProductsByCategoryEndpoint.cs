@@ -4,7 +4,7 @@ using CatalogApi.Products.GetProducts;
 namespace CatalogApi.Products.GetProductsByCategory
 {
     //public record GetProductsByCategoryRequest(string Category);
-    public record GetProductsByCategoryResponse(IReadOnlyList<ProductDto> ProductDtos);
+    public record GetProductsByCategoryResponse(IEnumerable<ProductDto> ProductDtos);
     public class GetProductsByCategoryEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)

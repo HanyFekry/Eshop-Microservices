@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Api.Endpoints
 {
-    public record GetOrdersByCustomerIdResponse(IReadOnlyList<OrderDto> Orders);
+    public record GetOrdersByCustomerIdResponse(IEnumerable<OrderDto> Orders);
     public class GetOrdersByCustomerId : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)

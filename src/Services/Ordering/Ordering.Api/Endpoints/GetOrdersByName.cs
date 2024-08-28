@@ -3,8 +3,7 @@
 namespace Ordering.Api.Endpoints
 {
     //public record GetOrdersByNameRequest(string OrderName);
-
-    public record GetOrdersByNameResponse(IReadOnlyList<OrderDto> Orders);
+    public record GetOrdersByNameResponse(IEnumerable<OrderDto> Orders);
     public class GetOrdersByName : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
