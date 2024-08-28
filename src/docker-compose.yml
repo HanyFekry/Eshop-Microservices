@@ -34,11 +34,18 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
 
+  yarpapigateway:
+    image: ${DOCKER_REGISTRY-}yarpapigateway
+    build:
+      context: .
+      dockerfile: ApiGateways/YarpApiGateways/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
   sql_order:
   # cache:
+
 
 
 
