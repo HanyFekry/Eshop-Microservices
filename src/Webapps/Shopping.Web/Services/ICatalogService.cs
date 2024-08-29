@@ -4,10 +4,10 @@ namespace Shopping.Web.Services
     public interface ICatalogService
     {
         [Get("catalog-service/products?pageIndex={pageIndex}&pageSize={pageSize}")]
-        Task<GetProductsResponse> GetProductsAsync(int pageIndex, int pageSize);
+        Task<GetProductsResponse> GetProducts(int pageIndex, int pageSize);
         [Get("catalog-service/products/category={category}")]
-        Task<GetProductsByCategoryResponse> GetProductsByCategoryAsync(string category);
+        Task<GetProductsByCategoryResponse> GetProductsByCategory(string category);
         [Get("catalog-service/products/{id}")]
-        Task<GetProductByIdResponse> GetProductByIdAsync(Guid id);
+        Task<GetProductByIdResponse> GetProductById(Guid id);
     }
 }

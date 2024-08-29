@@ -19,4 +19,6 @@
 
     public record StoreBasketRequest(ShoppingCartModel Cart);
     public record StoreBasketResponse(string UserName);
+
+    public record DeleteBasketResponse(bool Success);
 }
