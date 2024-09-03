@@ -2,7 +2,7 @@
 namespace CatalogApi.Products.GetProducts
 {
     public record GetProductsRequest(int PageNumber = 1, int PageSize = 10);
-    public record GetProductsResponse(IEnumerable<ProductDto>? ProductDtos);
+    public record GetProductsResponse(IEnumerable<ProductDto> ProductDtos);
     public class GetProductsEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)

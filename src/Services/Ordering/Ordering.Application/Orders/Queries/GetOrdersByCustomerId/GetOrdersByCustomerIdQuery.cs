@@ -8,5 +8,5 @@ namespace Ordering.Application.Orders.Queries.GetOrdersByCustomerId
 {
     public record GetOrdersByCustomerIdQuery(Guid CustomerId) : IQuery<GetOrdersByCustomerIdResult>;
 
-    public record GetOrdersByCustomerIdResult(IReadOnlyList<OrderDto> Orders);
+    public record GetOrdersByCustomerIdResult(IEnumerable<OrderDto> Orders);
 }

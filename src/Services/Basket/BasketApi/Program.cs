@@ -34,6 +34,7 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 });
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+//grpc
 builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(opt =>
 {
     opt.Address = new Uri(builder.Configuration.GetValue<string>("GrpcSettings:DiscountUrl")!);
