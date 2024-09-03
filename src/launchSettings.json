@@ -11,7 +11,8 @@
         "distributedcache": "StartWithoutDebugging",
         "discountgrpc": "StartDebugging",
         "ordering.api": "StartDebugging",
-        "yarpapigateway": "StartDebugging"
+        "yarpapigateway": "StartDebugging",
+        "shopping.web": "StartDebugging"
       }
     }
   }
