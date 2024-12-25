@@ -11,6 +11,7 @@ namespace BuildingBlocks.Behaviors
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             //pre processor behaviour (excutes before the request)
+            //validates the request before calling the handler
             var context = new ValidationContext<TRequest>(request);
             var validationResults = await Task.WhenAll(validators.Select(v => v.ValidateAsync(context, cancellationToken)));
             var errors = validationResults.Where(x => x.IsValid == false).SelectMany(x => x.Errors).ToList();
