@@ -15,12 +15,10 @@ namespace CatalogApi.Products.CreateProduct
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("{PropertyName} is required");
         }
     }
-    public class CreateProductHandler(IDocumentSession session, ILogger<CreateProductHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    public class CreateProductHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            //log information
-            logger.LogInformation($"CreateProductHandler.Handle called with parameter:{request}");
             //map CreateProductCommand to Product
             //Save Product to database.
             var entity = request.Adapt<Product>();
