@@ -19,6 +19,7 @@ namespace CatalogApi.Products.CreateProduct
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            //log information
             logger.LogInformation($"CreateProductHandler.Handle called with parameter:{request}");
             //map CreateProductCommand to Product
             //Save Product to database.
