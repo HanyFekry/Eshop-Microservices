@@ -11,7 +11,7 @@ namespace Ordering.Application.Orders.Queries.GetOrdersByName
                 .Where(x => x.OrderName.Value.Contains(request.OrderName))
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
-            return new GetOrdersByNameResult(ordersFromDb.ToOrderDtoList().ToList());
+            return new GetOrdersByNameResult(ordersFromDb.ToOrderDtoList());
 
         }
     }
