@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Ordering.Api
+namespace Identity.Infrastructure
 {
     public class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions>
     {
@@ -35,21 +35,12 @@ namespace Ordering.Api
                 RequireExpirationTime = true,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero,
-                // Enforce configured token lifetime when issuing tokens by checking iat and exp
                 LifetimeValidator = (notBefore, expires, securityToken, validationParameters) =>
                 {
-                    if (expires == null)
-                        return false;
+                    if (expires == null) return false;
+                    if (expires <= DateTime.UtcNow) return false;
+                    if (_settings.ExpiresInMinutes <= 0) return true;
 
-                    // token expired
-                    if (expires <= DateTime.UtcNow)
-                        return false;
-
-                    // If no limit configured, accept valid non-expired tokens
-                    if (_settings.ExpiresInMinutes <= 0)
-                        return true;
-
-                    // Try to read issued-at (iat) from token and ensure it doesn't claim a longer lifetime
                     if (securityToken is JwtSecurityToken jwt)
                     {
                         if (jwt.Payload.TryGetValue("iat", out var iatObj) && iatObj != null)
@@ -69,15 +60,10 @@ namespace Ordering.Api
                                 {
                                     var issued = DateTimeOffset.FromUnixTimeSeconds(iatSeconds).UtcDateTime;
                                     var maxExp = issued.AddMinutes(_settings.ExpiresInMinutes);
-                                    // if token's exp is after allowed maximum, reject
-                                    if (expires > maxExp)
-                                        return false;
+                                    if (expires > maxExp) return false;
                                 }
                             }
-                            catch
-                            {
-                                // if any parsing error, fall back to default lifetime validation
-                            }
+                            catch { }
                         }
                     }
 

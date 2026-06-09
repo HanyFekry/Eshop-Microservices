@@ -15,5 +15,54 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="Services\Identity\Identity.Api\appsettings.json" />
+    <None Include="Services\Identity\Identity.Api\Controllers\AdminController.cs" />
+    <None Include="Services\Identity\Identity.Api\Controllers\AuthController.cs" />
+    <None Include="Services\Identity\Identity.Api\DependencyInjection.cs" />
+    <None Include="Services\Identity\Identity.Api\Identity.Api.csproj" />
+    <None Include="Services\Identity\Identity.Api\Program.cs" />
+    <None Include="Services\Identity\Identity.Application\Behaviors\ValidationBehavior.cs" />
+    <None Include="Services\Identity\Identity.Application\Contracts\IIdentityService.cs" />
+    <None Include="Services\Identity\Identity.Application\Contracts\IJwtService.cs" />
+    <None Include="Services\Identity\Identity.Application\DependencyInjection.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Administration\GetUsers.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Administration\SetUserActive.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Administration\Validators\SetUserActiveCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\ForgotPassword.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Login.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\LoginWithOtp.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Register.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\RequestOtp.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\ResetPassword.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\RotateRefreshToken.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Validators\ForgotPasswordCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Validators\LoginCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Validators\RegisterCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Validators\ResetPasswordCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Features\Auth\Validators\RotateRefreshTokenCommandValidator.cs" />
+    <None Include="Services\Identity\Identity.Application\Identity.Application.csproj" />
+    <None Include="Services\Identity\Identity.Application\Models\ForgotPasswordResponseDto.cs" />
+    <None Include="Services\Identity\Identity.Application\Models\RegisterResponseDto.cs" />
+    <None Include="Services\Identity\Identity.Application\Models\ResetPasswordResponseDto.cs" />
+    <None Include="Services\Identity\Identity.Application\Models\TokenResponseDto.cs" />
+    <None Include="Services\Identity\Identity.Domain\ApplicationUser.cs" />
+    <None Include="Services\Identity\Identity.Domain\Identity.Domain.csproj" />
+    <None Include="Services\Identity\Identity.Domain\Models\RefreshToken.cs" />
+    <None Include="Services\Identity\Identity.Domain\Models\UserDto.cs" />
+    <None Include="Services\Identity\Identity.Infrastructure\ApplicationDbContext.cs" />
+    <None Include="Services\Identity\Identity.Infrastructure\ConfigureJwtBearerOptions.cs" />
+    <None Include="Services\Identity\Identity.Infrastructure\DependencyInjection.cs" />
+    <None Include="Services\Identity\Identity.Infrastructure\Identity.Infrastructure.csproj" />
+    <None Include="Services\Identity\Identity.Infrastructure\IdentityService.cs" />
+    <None Include="Services\Identity\Identity.Infrastructure\JwtTokenService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BuildingBlocks\Email\" />
+    <Folder Include="Services\Identity\Identity.Api\EmailClient\" />
+    <Folder Include="Services\Identity\Identity.Api\Models\" />
+    <Folder Include="Services\Identity\Identity.Api\Services\" />
+    <Folder Include="Services\Identity\Identity.Application\Commands\" />
+    <Folder Include="Services\Identity\Identity.Application\Common\" />
+    <Folder Include="Services\Identity\Identity.Application\Handlers\" />
   </ItemGroup>
 </Project>
