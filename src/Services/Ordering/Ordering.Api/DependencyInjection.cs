@@ -18,16 +18,9 @@ namespace Ordering.Api
             services.AddCarter();
 
             // Bind Jwt settings using options pattern
-            services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
-
             // Register JWT authentication and let the IConfigureOptions<JwtBearerOptions>
             // (registered below) populate the JwtBearer options from JwtSettings.
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer();
-
             // Configure JwtBearerOptions from JwtSettings using options pattern
-            services.AddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
-            services.AddAuthorization();
             services.AddExceptionHandler<CustomExceptionHandler>();
             services.AddHealthChecks()
                 .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
