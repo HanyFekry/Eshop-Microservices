@@ -15,7 +15,7 @@ namespace CatalogApi.Products.CreateProduct
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("{PropertyName} is required");
         }
     }
-    internal class CreateProductHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    public class CreateProductHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
